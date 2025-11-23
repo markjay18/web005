@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=list_alt" />
+    <title>async, defer</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/svgBB6xJ/icon.png">
+  </head>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0 auto;
+    }
+    .scrollspy {
+      position: relative;
+      height: 500px;
+      overflow: auto;
+    }
+    .btn {
+      margin-bottom: 17px;
+      background-color: rgb(255, 64, 86);
+      color: white;
+      border: 1px solid rgb(255, 64, 86);
+    }
+    .def {
+      margin-bottom: 20px;
+    }
+    .navbar {
+      background-color: white!important;
+      margin: 0!important;
+      width: 100%;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+    .list-group-item.active {
+      background-color: rgb(255, 64, 86)!important;
+      border: none!important;
+    }
+    .card-header {
+      font-size: 20px;
+    }
+    .cache {
+      margin-top: 17px;
+    }
+    .list-item-design {
+      border-radius: 5px;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      margin: 8px;
+    }
+    .card-text {
+      padding-top: 30px;
+    }
+    .bi-rocket-takeoff {
+      color: rgb(255, 64, 86)!important;
+    }
+    .logo {
+      width: 40px;
+      height: auto;
+    }
+    .bi-linkedin {
+      color: rgb(255, 64, 86);
+    }
+    .sidebar {
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 2000;
+    }
+    .lg {
+      border-radius: 0!important;
+    }
+    .navbar-brand {
+      display: flex;
+      align-items: center; /* vertically aligned */
+      gap: 10px; /* space between icon and image */
+    }
+    .navbar-brand .bi-list {
+      cursor: pointer;
+      color: rgb(255, 64, 86);
+      border: 1px solid rgb(255, 64, 86);
+      border-radius: 5px;
+    }
+    .offcanvas-start {
+      width: 280px!important;
+    }
+    .menu-list {
+      font-size: 14px!important;
+      margin-top: 5px!important;
+    }
+    .txt {
+      font-size: clamp(12px, 2.5vw, 15px);
+      /* white-space: pre-wrap;
+      word-break: break-word; */
+    }
+    .ex {
+      margin-bottom: -5px;
+      margin-top: 10px;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 850px;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+      /* optional: rounded corners */
+    }
+  </style>
+  <body>
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Topics</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0 m-0">
+      
+      <div class="list-group lg">
+        <a href="https://web002-five.vercel.app/" class="list-group-item list-group-item-action" aria-current="true">
+          <div class="d-flex w-100 justify-content-between">
+            <p class="mb-1 menu-list">Password Protected Folder</p>
+          </div>
+        </a>
+        <a href="https://web003-kappa.vercel.app/" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <p class="mb-1 menu-list">Laravel's Catching</p>
+          </div>
+        </a>
+        <a href="https://web004.vercel.app/" class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <p class="mb-1 menu-list">Pest + Laravel</p>
+          </div>
+        </a>
+        <a href="" class="list-group-item list-group-item-action active">
+          <div class="d-flex w-100 justify-content-between">
+            <p class="mb-1 menu-list">async, defer</p>
+          </div>
+        </a>
+      </div>
+      
+    </div>
+  </div>
+
+  <nav class="navbar sticky-top bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">       
+        <svg data-bs-toggle="offcanvas" href="#offcanvasExample" xmlns="http://www.w3.org/2000/svg" width="33" height="33" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+        </svg>
+        <img class="logo ls-is-cached lazyloaded" src="https://img.eselt.de/img/18916828_7BB10W5OYUxz7zoE/ad.jpg" alt="">
+      </a>
+    </div>
+  </nav>
+    <div class="container">
+      <div class="card mb-3 cache" style="max-width: 100%;">
+        <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"></a>
+        <div class="card-header"> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-rocket-takeoff" viewBox="0 0 16 16">
+                <path d="M9.752 6.193c.599.6 1.73.437 2.528-.362s.96-1.932.362-2.531c-.599-.6-1.73-.438-2.528.361-.798.8-.96 1.933-.362 2.532"/>
+                <path d="M15.811 3.312c-.363 1.534-1.334 3.626-3.64 6.218l-.24 2.408a2.56 2.56 0 0 1-.732 1.526L8.817 15.85a.51.51 0 0 1-.867-.434l.27-1.899c.04-.28-.013-.593-.131-.956a9 9 0 0 0-.249-.657l-.082-.202c-.815-.197-1.578-.662-2.191-1.277-.614-.615-1.079-1.379-1.275-2.195l-.203-.083a10 10 0 0 0-.655-.248c-.363-.119-.675-.172-.955-.132l-1.896.27A.51.51 0 0 1 .15 7.17l2.382-2.386c.41-.41.947-.67 1.524-.734h.006l2.4-.238C9.005 1.55 11.087.582 12.623.208c.89-.217 1.59-.232 2.08-.188.244.023.435.06.57.093q.1.026.16.045c.184.06.279.13.351.295l.029.073a3.5 3.5 0 0 1 .157.721c.055.485.051 1.178-.159 2.065m-4.828 7.475.04-.04-.107 1.081a1.54 1.54 0 0 1-.44.913l-1.298 1.3.054-.38c.072-.506-.034-.993-.172-1.418a9 9 0 0 0-.164-.45c.738-.065 1.462-.38 2.087-1.006M5.205 5c-.625.626-.94 1.351-1.004 2.09a9 9 0 0 0-.45-.164c-.424-.138-.91-.244-1.416-.172l-.38.054 1.3-1.3c.245-.246.566-.401.91-.44l1.08-.107zm9.406-3.961c-.38-.034-.967-.027-1.746.163-1.558.38-3.917 1.496-6.937 4.521-.62.62-.799 1.34-.687 2.051.107.676.483 1.362 1.048 1.928.564.565 1.25.941 1.924 1.049.71.112 1.429-.067 2.048-.688 3.079-3.083 4.192-5.444 4.556-6.987.183-.771.18-1.345.138-1.713a3 3 0 0 0-.045-.283 3 3 0 0 0-.3-.041Z"/>
+                <path d="M7.009 12.139a7.6 7.6 0 0 1-1.804-1.352A7.6 7.6 0 0 1 3.794 8.86c-1.102.992-1.965 5.054-1.839 5.18.125.126 3.936-.896 5.054-1.902Z"/>
+            </svg>
+            async, defer
+        </div>
+      </div>
+      <h4 class="def">⚡ Best & Fastest Way to Load JavaScript in HTML</h4>
+      <p>When loading JavaScript, the goal is speed + smooth page load.</p>
+      <p>Here’s an easy, catchy, emoji-filled explanation of the best and fastest way to load JavaScript in HTML 🚀</p>
+      <div class="video-container">
+          <iframe width="850" height="512" src="https://www.youtube.com/embed/z4VTwj-DdmU?si=xcrRZf8j5vOqX_Xz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <div class="row">
+        <div>
+          <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy" tabindex="0">
+            <p class="ex">🟥 No async, No defer</p>
+            <div class="list-item-design">
+              <pre class="card-text txt" id="list-item-1">
+              🙂 NORMAL : HTML stops → load → run → continue
+              </pre>
+            </div>
+            <p class="ex">🟦 async Script</p>
+            <div class="list-item-design">
+              <pre class="card-text txt" id="list-item-2">
+              ASYNC  : HTML parses + load → run anytime (interrupt)
+
+              ✔ Fast
+              ❌ Order not guaranteed
+              ❌ Can interrupt parsing
+              </pre>
+            </div>
+            <p class="ex">🟩 defer Script</p>
+            <div class="list-item-design">
+              <pre class="card-text txt" id="list-item-3">
+              DEFER  : HTML parses + load → run only after HTML finishes
+
+              ✔ Predictable
+              ✔ Ordered
+              ✔ DOM is ready
+              ✔ Does NOT interrupt parsing
+              </pre>
+            </div>
+            <div class="list-item-design">
+              <pre class="card-text txt" id="list-item-4">
+              🥇 Best Option (Most of the Time): defer
+              ✔ Best for your main JavaScript
+              ✔ Best for apps, UI scripts, libraries, and page logic
+              ✔ Loads fast and waits until HTML is ready
+              ✔ Keeps script order
+
+              </pre>
+            </div>
+          </div>
+           <p class="card-text">
+              <button type="button" class="btn btn-info" id="webRedirect">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                    <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+                </svg>
+                About Developer</button>
+            </p>
+        </div>
+      </div>        
+    </div>
+    <footer class="bg-dark text-light pt-5">
+      <div class="container px-5">
+        <div class="row">
+          <div class="col-6 col-lg-4">
+            <p class="fw-bold">EXPERT CODING</p>
+          </div>
+          <div class="col-6 col-lg-8 text-lg-end">
+            <p>Social Media Link</p>
+            <div class="social-media pt-1">
+              <a href="https://www.linkedin.com/in/markjay-lajada-12528b310/" target="_blank" class="text-light fs-4"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="d-sm-flex justify-content-between py-1">
+          <p>2025 © MARKJAY CODING. All Rights Reserved. </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+  
+  <script>
+    (() => {
+        const targetURL = "https://markjay18.github.io/tsxml-app/";
+
+        // Prevent modification of the URL variable
+        Object.freeze(targetURL);
+
+        document.getElementById("webRedirect").addEventListener("click", () => {
+            // Use noreferrer and noopener to prevent tab hijacking
+            const newWindow = window.open(targetURL, "_blank", "noopener,noreferrer");
+
+            if (newWindow) {
+                alert("Popup blocked! Please allow popups or click this link manually: " + targetURL);
+            }
+        });
+    })();
+  </script>
+
+</html>
+
+
+
